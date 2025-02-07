@@ -10,7 +10,7 @@ module.exports.RegisterUser = async (req, res) => {
 
     const user = new User({ name, email, password: hash });
     await user.save();
-    res.send({ message: "User registered successfully" });
+    res.status(201).send({ message: "User registered successfully" });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
