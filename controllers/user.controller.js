@@ -88,6 +88,20 @@ module.exports.GetUser = async (req, res) => {
   }
 };
 
+module.exports.UpdateUserDetails = async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.user.userId, req.body, {
+      new: true,
+    });
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+    res.status(200).send(user);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 module.exports.LogoutUser = (req, res) => {
   try {
     res.clearCookie("accessToken");

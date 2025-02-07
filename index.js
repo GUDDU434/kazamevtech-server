@@ -8,6 +8,7 @@ const {
   LogoutUser,
   RefreshToken,
   GetUser,
+  UpdateUserDetails,
 } = require("./controllers/user.controller");
 const { authenticate } = require("./middleware/auth_middleware");
 require("dotenv").config();
@@ -29,6 +30,7 @@ app.post("/auth/login", LoginUser);
 app.post("/auth/refresh", RefreshToken);
 app.get("/auth/logout", authenticate, LogoutUser);
 app.get("/auth/user", authenticate, GetUser);
+app.put("/auth/user", authenticate, UpdateUserDetails);
 
 // Tasks Routes
 app.post("/task", authenticate, taskRouter.CreateTask);
